@@ -70,6 +70,19 @@ function render() {
 
 document.getElementById("search").addEventListener("input", render);
 render();
+  
+// Restore scroll position after render
+const savedScroll = localStorage.getItem("scrollPos");
+if (savedScroll !== null) {
+  window.scrollTo(0, parseInt(savedScroll, 10));
+}
+
+// Save scroll position when scrolling
+window.addEventListener("scroll", () => {
+  localStorage.setItem("scrollPos", window.scrollY);
+});
+
+  
 </script>
 </body>
 </html>
