@@ -81,9 +81,8 @@ function render() {
   list.innerHTML = "";
   chapters.forEach((chapter, i) => {
     if(q && !chapter.toLowerCase().includes(q)) return;
-    const row = document.createElement("div");
-    row.className = "chapter";
-const isGenesis = chapter.startsWith("Genesis ");
+  const row = document.createElement("div");
+row.className = "chapter";
 
 const match = chapter.match(/^Genesis (\d+)$/);
 const isGenesis = match !== null;
