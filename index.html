@@ -56,9 +56,9 @@ const chapters = ["Genesis 1", "Genesis 2", "Genesis 3", "Genesis 4", "Genesis 5
 const STORAGE_KEY = "bibleTimelineProgress";
 
 function getGenesisLink(chapterNumber) {
-  const padded = String(chapterNumber).padStart(3, "0");
+  const chapter = String(chapterNumber).padStart(3, "0");
 
-  return `https://www.jw.org/finder?srcid=jwlshare&wtlocale=E&prefer=lang&bible=0100${padded}00-0100${padded}99&pub=nwtsty`;
+  return `https://www.jw.org/finder?srcid=jwlshare&wtlocale=E&prefer=lang&bible=01${chapter}000-01${chapter}999&pub=nwtsty`;
 }
   
 let completed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
