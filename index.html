@@ -165,29 +165,26 @@ function render() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-chapters.forEach((chapter, i) => {
-
-  if (i === 0) {
-    const heading = document.createElement("h3");
-    heading.textContent = "In the beginning...";
-    heading.style.margin = "0 0 12px 0";
-    heading.style.fontWeight = "bold";
-    list.appendChild(heading);
-  }
-
-  if(q && !chapter.toLowerCase().includes(q)) return;
-
-  
   chapters.forEach((chapter, i) => {
+
+    if (i === 0) {
+      const heading = document.createElement("h3");
+      heading.textContent = "In the beginning...";
+      heading.style.margin = "0 0 12px 0";
+      heading.style.fontWeight = "bold";
+      list.appendChild(heading);
+    }
+
     if(q && !chapter.toLowerCase().includes(q)) return;
-  const row = document.createElement("div");
 
-const book = chapter.replace(/ \d+$/, "");
-const cat = bookCategory[book];
+    const row = document.createElement("div");
 
-row.className = `chapter cat-${cat || 0}`;
+    const book = chapter.replace(/ \d+$/, "");
+    const cat = bookCategory[book];
 
-const link = getChapterLink(chapter);
+    row.className = `chapter cat-${cat || 0}`;
+
+    const link = getChapterLink(chapter);
 
 row.innerHTML = `
   <input type="checkbox" ${completed[i] ? "checked" : ""}>
