@@ -94,6 +94,7 @@ header p {
   <button id="resetBtn">Reset Progress</button>
   <button id="hebrewBtn">Hebrew Scriptures</button>
   <button id="greekBtn">Greek Scriptures</button>
+  <button id="randomBtn">Random Chapter</button>
 </div>
 
   
@@ -300,6 +301,19 @@ window.addEventListener("scroll", () => {
 document.getElementById("greekBtn").addEventListener("click", () => {
   const el = document.getElementById("greek-start");
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+  document.getElementById("randomBtn").addEventListener("click", () => {
+  const rows = document.querySelectorAll(".chapter");
+
+  if (rows.length === 0) return;
+
+  const randomRow = rows[Math.floor(Math.random() * rows.length)];
+
+  randomRow.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 });
   
 </script>
