@@ -51,6 +51,20 @@ input[type=checkbox]{transform:scale(1.3);margin-right:12px}
   background: #eee;
 }
 
+  .reset-btn{
+  width:100%;
+  margin-bottom:12px;
+  padding:10px;
+  border:1px solid #d33;
+  border-radius:8px;
+  background:white;
+  color:#d33;
+  font-size:14px;
+}
+
+.reset-btn:active{
+  background:#ffecec;
+}
   
 
   .chapter a{
@@ -95,11 +109,13 @@ header p {
 <div id="stats">0 / 1189 </div>
   
 <div class="btn-row">
-  <button id="resetBtn">Reset Progress</button>
+  <button id="lastReadBtn">Last Read</button>
   <button id="hebrewBtn">Hebrew Scriptures</button>
   <button id="greekBtn">Greek Scriptures</button>
   <button id="randomBtn">Random Chapter</button>
 </div>
+
+<button id="resetBtn" class="reset-btn">Reset Progress</button>
 
   
 <div class="progress"><div class="bar" id="bar"></div></div>
@@ -355,6 +371,35 @@ if (savedScroll !== null) {
 window.addEventListener("scroll", () => {
   localStorage.setItem("scrollPos", window.scrollY);
 });
+
+document.getElementById("lastReadBtn").addEventListener("click", () => {
+
+  let lastIndex = -1;
+
+  for (let i = chapters.length - 1; i >= 0; i--) {
+    if (completed[i]) {
+      lastIndex = i;
+      break;
+    }
+  }
+
+  if (lastIndex === -1) {
+    alert("No chapters have been completed yet.");
+    return;
+  }
+
+  const rows = document.querySelectorAll(".chapter");
+
+  if (rows[lastIndex]) {
+    rows[lastIndex].scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+});
+
+  
 
   document.getElementById("resetBtn").addEventListener("click", () => {
   if (!confirm("Reset all progress?")) return;
