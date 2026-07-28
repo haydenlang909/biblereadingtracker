@@ -51,15 +51,18 @@ input[type=checkbox]{transform:scale(1.3);margin-right:12px}
   background: #eee;
 }
 
-  .reset-btn{
-  width:100%;
-  margin-bottom:12px;
+.reset-btn{
+  flex:1;
   padding:10px;
   border:1px solid #d33;
   border-radius:8px;
   background:white;
   color:#d33;
   font-size:14px;
+}
+
+.reset-btn:active{
+  background:#ffecec;
 }
 
 .reset-btn:active{
@@ -115,7 +118,9 @@ header p {
   <button id="randomBtn">Random Chapter</button>
 </div>
 
-<button id="resetBtn" class="reset-btn">Reset Progress</button>
+<div class="btn-row">
+  <button id="resetBtn" class="reset-btn">Reset Progress</button>
+</div>
 
   
 <div class="progress"><div class="bar" id="bar"></div></div>
