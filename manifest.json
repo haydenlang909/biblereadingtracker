@@ -1,0 +1,12 @@
+{
+  "name": "Bible Reading Tracker",
+  "short_name": "Bible Tracker",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone"
+}
