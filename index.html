@@ -195,6 +195,20 @@ function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(completed));
 }
 
+function checkBookCompletion(chapterIndex) {
+  const completedBook = chapters[chapterIndex].replace(/ \d+$/, "");
+
+  const bookChapters = chapters
+    .map((chapter, index) => ({ chapter, index }))
+    .filter(item => item.chapter.startsWith(completedBook + " "));
+
+  const allComplete = bookChapters.every(item => completed[item.index]);
+
+  if (allComplete) {
+    alert(`🎉 Congratulations! You have completed the book of ${completedBook}!`);
+  }
+}
+
 function updateProgress() {
   const count = Object.values(completed).filter(Boolean).length;
   const pct = (count / chapters.length) * 100;
@@ -396,11 +410,15 @@ row.innerHTML = `
     : `<span>${chapter}</span>`
 }
 `;
-    row.querySelector("input").addEventListener("change", e => {
-      completed[i] = e.target.checked;
-      save();
-      updateProgress();
-    });
+row.querySelector("input").addEventListener("change", e => {
+  completed[i] = e.target.checked;
+  save();
+  updateProgress();
+
+  if (e.target.checked) {
+    checkBookCompletion(i);
+  }
+});
     list.appendChild(row);
   });
   updateProgress();
