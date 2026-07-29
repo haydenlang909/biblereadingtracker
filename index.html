@@ -205,15 +205,43 @@ function checkBookCompletion(chapterIndex) {
   const allComplete = bookChapters.every(item => completed[item.index]);
 
   if (allComplete) {
-    alert(`Congratulations! You have completed the book of ${completedBook}!`);
+    showNotification(`🎉 Congratulations! You have completed the book of ${completedBook}!`);
   }
+}
+
+function getReadingStreak() {
+  const history = JSON.parse(localStorage.getItem("readingHistory") || "[]");
+
+  if (history.length === 0) return 0;
+
+  let streak = 1;
+
+  for (let i = history.length - 1; i > 0; i--) {
+    const current = new Date(history[i]);
+    const previous = new Date(history[i - 1]);
+
+    const difference =
+      (current - previous) / (1000 * 60 * 60 * 24);
+
+    if (difference <= 1.1) {
+      streak++;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
 }
 
 function updateProgress() {
   const count = Object.values(completed).filter(Boolean).length;
   const pct = (count / chapters.length) * 100;
+
+  const streak = getReadingStreak();
+
   document.getElementById("stats").textContent =
-    `${count} / 1189 chapters (${pct.toFixed(1)}%)`;
+    `${count} / 1189 chapters (${pct.toFixed(1)}%) | 🔥 ${streak} day streak`;
+
   document.getElementById("bar").style.width = pct + "%";
 }
 
@@ -412,12 +440,22 @@ row.innerHTML = `
 `;
 row.querySelector("input").addEventListener("change", e => {
   completed[i] = e.target.checked;
-  save();
-  updateProgress();
 
   if (e.target.checked) {
+    const history = JSON.parse(localStorage.getItem("readingHistory") || "[]");
+
+    const today = new Date().toISOString().split("T")[0];
+
+    if (!history.includes(today)) {
+      history.push(today);
+      localStorage.setItem("readingHistory", JSON.stringify(history));
+    }
+
     checkBookCompletion(i);
   }
+
+  save();
+  updateProgress();
 });
     list.appendChild(row);
   });
