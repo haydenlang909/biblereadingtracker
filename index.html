@@ -511,18 +511,24 @@ row.innerHTML = `
 row.querySelector("input").addEventListener("change", e => {
   completed[i] = e.target.checked;
 
-  if (e.target.checked) {
-    const history = JSON.parse(localStorage.getItem("readingHistory") || "[]");
+ if (e.target.checked) {
+  const history = JSON.parse(localStorage.getItem("readingHistory") || "[]");
 
-    const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
 
-    if (!history.includes(today)) {
-      history.push(today);
-      localStorage.setItem("readingHistory", JSON.stringify(history));
-    }
-
-    checkBookCompletion(i);
+  if (!history.includes(today)) {
+    history.push(today);
+    localStorage.setItem("readingHistory", JSON.stringify(history));
   }
+
+  checkBookCompletion(i);
+
+  const count = Object.values(completed).filter(Boolean).length;
+
+  if (count === 595) {
+    showNotification("🎉 You're halfway through the Bible!");
+  }
+}
 
   save();
   updateProgress();
