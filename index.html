@@ -310,7 +310,7 @@ function updateProgress() {
   const streak = getReadingStreak();
 
   document.getElementById("stats").textContent =
-    `${count} / 1189 chapters (${pct.toFixed(1)}%) | 🔥 ${streak} day streak`;
+    `${count} / 1189 chapters (${pct.toFixed(2)}%) | 🔥 ${streak} day streak`;
 
   document.getElementById("bar").style.width = pct + "%";
 }
