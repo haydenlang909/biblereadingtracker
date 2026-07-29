@@ -195,6 +195,10 @@ function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(completed));
 }
 
+function showNotification(message) {
+  alert(message);
+}
+
 function checkBookCompletion(chapterIndex) {
   const completedBook = chapters[chapterIndex].replace(/ \d+$/, "");
 
