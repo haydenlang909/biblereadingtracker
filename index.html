@@ -608,9 +608,20 @@ document.getElementById("greekBtn").addEventListener("click", () => {
   document.getElementById("randomBtn").addEventListener("click", () => {
   const rows = document.querySelectorAll(".chapter");
 
-  if (rows.length === 0) return;
+  // Get only unticked chapters
+  const untickedRows = [];
 
-  const randomRow = rows[Math.floor(Math.random() * rows.length)];
+  rows.forEach((row, index) => {
+    if (!completed[index]) {
+      untickedRows.push(row);
+    }
+  });
+
+  // Do nothing if every chapter is complete
+  if (untickedRows.length === 0) return;
+
+  const randomRow =
+    untickedRows[Math.floor(Math.random() * untickedRows.length)];
 
   randomRow.scrollIntoView({
     behavior: "smooth",
