@@ -615,11 +615,16 @@ document.getElementById("lastReadBtn").addEventListener("click", () => {
 
   
 
-  document.getElementById("resetBtn").addEventListener("click", () => {
+document.getElementById("resetBtn").addEventListener("click", () => {
   if (!confirm("Reset all progress?")) return;
 
   completed = {};
+
+  // Clear chapter progress
   localStorage.removeItem(STORAGE_KEY);
+
+  // Clear reading history (resets streak to 0)
+  localStorage.removeItem("readingHistory");
 
   render();
   updateProgress();
