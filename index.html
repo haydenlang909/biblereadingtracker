@@ -596,28 +596,29 @@ window.addEventListener("scroll", () => {
 
 document.getElementById("lastReadBtn").addEventListener("click", () => {
 
-  let lastIndex = -1;
+  let nextIndex = -1;
 
   for (let i = chapters.length - 1; i >= 0; i--) {
     if (completed[i]) {
-      lastIndex = i;
+      nextIndex = i + 1;
       break;
     }
   }
 
-  if (lastIndex === -1) {
+  if (nextIndex === -1) {
     alert("No chapters have been completed yet.");
     return;
   }
 
+  // Do nothing if the last completed chapter is the final chapter
+  if (nextIndex >= chapters.length) return;
+
   const rows = document.querySelectorAll(".chapter");
 
-  if (rows[lastIndex]) {
-    rows[lastIndex].scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }
+  rows[nextIndex].scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 
 });
 
